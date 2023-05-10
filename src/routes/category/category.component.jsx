@@ -1,38 +1,38 @@
-import { useState, useEffect, Fragment } from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-
-import ProductCard from '../../components/product-card/product-card.component';
-import Spinner from '../../components/spinner/spinner.component';
-
+import { Fragment, useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ProductCard from "../../components/product-card/product-card.component";
+import Spinner from "../../components/spinner/spinner.component";
 import {
   selectCategoriesMap,
   selectCategoriesIsLoading,
-} from '../../store/categories/category.selector';
-
-import { CategoryContainer, Title } from './category.styles';
+} from "../../store/categories/category.selector";
+import { CategoryContainer } from "./category.style";
 
 const Category = () => {
   const { category } = useParams();
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
-  const [products, setProducts] = useState(categoriesMap[category]);
 
+  const [product, setProduct] = useState(categoriesMap[category]);
   useEffect(() => {
-    setProducts(categoriesMap[category]);
-  }, [category, categoriesMap]);
+    setProduct(categoriesMap[category]);
+  }, [categoriesMap, category]);
+  console.log(product, categoriesMap);
 
   return (
     <Fragment>
-      <Title>{category.toUpperCase()}</Title>
+      <h1>{category.toUpperCase()}</h1>
       {isLoading ? (
         <Spinner />
       ) : (
         <CategoryContainer>
-          {products &&
-            products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          {product
+            ? product.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))
+            : "No Match Found"}
         </CategoryContainer>
       )}
     </Fragment>

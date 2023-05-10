@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const CheckoutItemContainer = styled.div`
   width: 100%;
@@ -20,11 +20,11 @@ export const ImageContainer = styled.div`
   }
 `;
 
-export const BaseSpan = styled.span`
+export const ItemLeble = styled.span`
   width: 23%;
 `;
 
-export const Quantity = styled(BaseSpan)`
+export const Quantity = styled(ItemLeble)`
   display: flex;
 `;
 

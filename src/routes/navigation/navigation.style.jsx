@@ -1,5 +1,7 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+// import { IconButton } from "@material-ui/core";
 
 export const NavigationContainer = styled.div`
   height: 70px;
@@ -7,6 +9,16 @@ export const NavigationContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+
+  .title-text {height: 100%;
+    width: 550px;
+    padding: 25px;
+    font-weight: bold;
+    font-size: 53px;
+    text-align: left;
+    font-family: "Luckiest Guy", cursive;
+    color: #2e2e2fcf;
+  }
 `;
 
 export const LogoContainer = styled(Link)`
@@ -15,7 +27,7 @@ export const LogoContainer = styled(Link)`
   padding: 25px;
 `;
 
-export const NavLinks = styled.div`
+export const NavLinkContainer = styled.div`
   width: 50%;
   height: 100%;
   display: flex;

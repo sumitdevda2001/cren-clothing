@@ -1,48 +1,51 @@
-import { Fragment } from 'react';
-import { Outlet } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { Fragment } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Outlet, useLocation } from "react-router-dom";
 
-import CartIcon from '../../components/cart-icon/cart-icon.component';
-import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
-
-import { selectIsCartOpen } from '../../store/cart/cart.selector';
-import { selectCurrentUser } from '../../store/user/user.selector';
-import { signOutStart } from '../../store/user/user.action';
-
-import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
-
+import { ReactComponent as CrownLogo } from "../../assets/crown.svg";
+import CartIcon from "../../components/cart-icon/cart-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import {
   NavigationContainer,
-  NavLinks,
+  NavLinkContainer,
   NavLink,
   LogoContainer,
-} from './navigation.styles';
-
+} from "./navigation.style";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import { selectCartOpen } from "../../store/cart/cart.selector";
+import { signOutStart } from "../../store/user/user.action";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import SearchItem from "../../components/search-item/searchItem.componet";
 const Navigation = () => {
-  const dispatch = useDispatch();
+  const isCartOpen = useSelector(selectCartOpen);
   const currentUser = useSelector(selectCurrentUser);
-  const isCartOpen = useSelector(selectIsCartOpen);
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-  const signOutUser = () => dispatch(signOutStart());
-
+  const handleSignOut = () => {
+    dispatch(signOutStart());
+  };
   return (
     <Fragment>
       <NavigationContainer>
-        <LogoContainer to='/'>
-          <CrwnLogo className='logo' />
+        <LogoContainer to="/">
+          <CrownLogo className="logo" />
         </LogoContainer>
-        <NavLinks>
-          <NavLink to='/shop'>SHOP</NavLink>
-
+        <span className="title-text"> CREN-CLOTHING </span>
+        <NavLinkContainer>
+          {location.pathname !== "/" && <SearchItem />}
+          <NavLink to="/shop">SHOP</NavLink>
           {currentUser ? (
-            <NavLink as='span' onClick={signOutUser}>
+            <NavLink as="span" onClick={handleSignOut}>
               SIGN OUT
             </NavLink>
           ) : (
-            <NavLink to='/auth'>SIGN IN</NavLink>
+            <NavLink to="/auth">SIGN IN</NavLink>
           )}
+          <ToastContainer />
           <CartIcon />
-        </NavLinks>
+        </NavLinkContainer>
         {isCartOpen && <CartDropdown />}
       </NavigationContainer>
       <Outlet />

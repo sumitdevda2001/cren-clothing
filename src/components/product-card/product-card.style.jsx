@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const ProductCartContainer = styled.div`
+export const ProductCardContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -24,8 +24,13 @@ export const ProductCartContainer = styled.div`
   }
 
   &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+
     img {
-      opacity: 0.8;
+      /* opacity: 0.8; */
+      transform: scale(1.1);
+      transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
     }
 
     button {

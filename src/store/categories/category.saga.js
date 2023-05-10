@@ -1,30 +1,44 @@
-import { takeLatest, all, call, put } from 'redux-saga/effects';
+import { takeLatest, all, call, put } from "redux-saga/effects";
 
-import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils';
+import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
 
 import {
-  fetchCategoriesSuccess,
-  fetchCategoriesFailed,
-} from './category.action';
+  fetchCategoriceSuccess,
+  fetchCategoriceFailed,
+} from "./category.action";
+import { fetchData } from "../../api/api";
 
-import { CATEGORIES_ACTION_TYPES } from './category.types';
+import { CATEGORIES_ACTION_TYPES } from "./category.types";
 
-export function* fetchCategoriesAsync() {
+export function* fetchCategoriceAsync() {
   try {
-    const categoriesArray = yield call(getCategoriesAndDocuments, 'categories');
-    yield put(fetchCategoriesSuccess(categoriesArray));
+    const categoriesArrayWithUsd = yield call(
+      getCategoriesAndDocuments,
+      "categories"
+    );
+    const urlExchange = "https://api.exchangerate.host/latest?base=USD";
+    const usdRate = yield fetchData(urlExchange).then((res) => res.rates.INR);
+    const categoriesArray = yield categoriesArrayWithUsd.map((category) => ({
+      ...category,
+      items: category.items.map((item) => ({
+        ...item,
+        price: Math.floor(item.price * usdRate),
+      })),
+    }));
+    yield console.log(categoriesArray);
+    yield put(fetchCategoriceSuccess(categoriesArray, 1));
   } catch (error) {
-    yield put(fetchCategoriesFailed(error));
+    yield put(fetchCategoriceFailed(error));
   }
 }
 
-export function* onFetchCategories() {
+export function* onFetchCategorice() {
   yield takeLatest(
-    CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START,
-    fetchCategoriesAsync
+    CATEGORIES_ACTION_TYPES.FETCH_CATEGORICE_START,
+    fetchCategoriceAsync
   );
 }
 
 export function* categoriesSaga() {
-  yield all([call(onFetchCategories)]);
+  yield all([call(onFetchCategorice)]);
 }

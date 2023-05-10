@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const SignInContainer = styled.div`
   display: flex;
@@ -6,11 +6,11 @@ export const SignInContainer = styled.div`
   width: 380px;
 
   h2 {
-    margin: 10px 0;
+    margin: 10px 0px;
   }
 `;
 
-export const ButtonsContainer = styled.div`
+export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;

@@ -9,22 +9,25 @@ export function SearchIcon(props) {
 export const SearchBox = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid #ccc;
+  border: 2px solid #2e2e2fcf;
   border-radius: 25px;
-  padding: 8px;
+  /* padding: 8px; */
   width: 200px;
   height: 32px;
   position: relative;
+  font-weight: bold;
 
   input[type="text"] {
     flex: 1;
-    border: none;
-    margin-left: 8px;
-    margin-right: 8px;
-    font-size: 16px;
-    width: calc(100% - 24px);
+    border: 5px;
+    width: 188px;
+    height: 28px;
+    font-size: 17px;
+    padding-left:15px;
+    /* width: calc(100% - 24px); */
     box-sizing: border-box;
-    font-family: "Sedgwick Ave Display", cursive;
+    font-family: Open Sans;
+    border-radius: 25px;
   }
 
   /* button {

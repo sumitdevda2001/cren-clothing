@@ -19,6 +19,8 @@ export const BaseButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
+  font-weight: bold;
 
   &:hover {
     background-color: white;
@@ -41,11 +43,13 @@ export const InvertedButton = styled(BaseButton)`
   background-color: white;
   color: black;
   border: 1px solid black;
+  
 
   &:hover {
     background-color: black;
     color: white;
     border: none;
+    
   }
 `;
 

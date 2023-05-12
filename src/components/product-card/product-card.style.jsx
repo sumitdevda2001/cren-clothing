@@ -13,6 +13,7 @@ export const ProductCardContainer = styled.div`
     height: 95%;
     object-fit: cover;
     margin-bottom: 5px;
+    border-radius: 27px;
   }
 
   button {
@@ -26,9 +27,15 @@ export const ProductCardContainer = styled.div`
   &:hover {
     cursor: pointer;
     opacity: 0.9;
+    border-radius: 27px;
+    button:active {
+    background-color: green;
+  }
+
 
     img {
       /* opacity: 0.8; */
+      border-radius: 27px;
       transform: scale(1.1);
       transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
     }
@@ -46,13 +53,17 @@ export const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+  margin-left: 25px;
 `;
 
 export const Name = styled.span`
   width: 90%;
   margin-bottom: 15px;
+  font-weight: bold;
 `;
 
 export const Price = styled.span`
   width: 10%;
+  margin-right: 45px;
+  font-weight: bold;
 `;

@@ -23,17 +23,17 @@ export const FormInputLabel = styled.label`
 `;
 export const Input = styled.input`
   background: none;
-  background-color: white;
+  background-color: #ede9c5;
   color: ${subColor};
   font-size: 18px;
   padding: 10px 10px 10px 5px;
   display: block;
   width: 100%;
-  border: none;
-  border-radius: 0;
+  border: #7872e8;
+  border-radius: 12px;
   border-bottom: 1px solid ${subColor};
   margin: 25px 0;
-  font-family: "Sedgwick Ave Display", cursive;
+  font-family: 'Open Sans', sans-serif;
 
   &:focus {
     outline: none;

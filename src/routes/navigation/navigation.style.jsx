@@ -19,7 +19,10 @@ export const NavigationContainer = styled.div`
     font-family: "Luckiest Guy", cursive;
     color: #2e2e2fcf;
   }
+  
 `;
+
+
 
 export const LogoContainer = styled(Link)`
   height: 100%;
@@ -33,9 +36,21 @@ export const NavLinkContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  
+  
+  
 `;
 
 export const NavLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
+  perspective: 1000px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 25px;
+
+  &:hover {
+    background-color: #2e2e2fcf;
+    color: white;
+    transform: perspective(10000px) rotateX(-1deg) translateZ(10px);
+  }
 `;

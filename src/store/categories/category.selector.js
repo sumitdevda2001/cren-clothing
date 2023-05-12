@@ -24,12 +24,19 @@ export const selectCategoriesMapzero = createSelector(
 
 export const selectSearchString = createSelector(
   [selectCategoryReducer],
-  (categories) => {
-    return categories.searchString;
+  (categoriesSlice) => {
+    return categoriesSlice.searchString;
   }
 );
 
-export const selectCategoriesMap = createSelector(
+export const selectSelectedPriceRange = createSelector(
+  [selectCategoryReducer],
+  (categoriesSlice) => {
+    return categoriesSlice.priceRange;
+  }
+);
+
+export const selectCategoriesMapWithSearch = createSelector(
   [selectCategoriesMapzero, selectSearchString],
   (categoriesWithSearch, searchString) =>
     Object.keys(categoriesWithSearch).length !== 0
@@ -53,6 +60,46 @@ export const selectCategoriesMap = createSelector(
       : categoriesWithSearch
 );
 
+export const selectCategoriesMapWithPriceRange = createSelector(
+  [selectCategoriesMapWithSearch, selectSelectedPriceRange],
+  (categoriesWithPriceRange, priceRange) => {
+    return priceRange
+      ? priceRange.value === "clear"
+        ? categoriesWithPriceRange
+        : {
+            hats: categoriesWithPriceRange.hats.filter(
+              (item) =>
+                item.price >= priceRange.startValue &&
+                item.price <= priceRange.endValue
+            ),
+            jackets: categoriesWithPriceRange.jackets.filter(
+              (item) =>
+                item.price >= priceRange.startValue &&
+                item.price <= priceRange.endValue
+            ),
+            mens: categoriesWithPriceRange.mens.filter(
+              (item) =>
+                item.price >= priceRange.startValue &&
+                item.price <= priceRange.endValue
+            ),
+            sneakers: categoriesWithPriceRange.sneakers.filter(
+              (item) =>
+                item.price >= priceRange.startValue &&
+                item.price <= priceRange.endValue
+            ),
+            womens: categoriesWithPriceRange.womens.filter(
+              (item) =>
+                item.price >= priceRange.startValue &&
+                item.price <= priceRange.endValue
+            ),
+          }
+      : categoriesWithPriceRange;
+  }
+);
+export const selectCategoriesMap = createSelector(
+  [selectCategoriesMapWithPriceRange],
+  (categoriesMap) => categoriesMap
+);
 export const selectCategoriesIsLoading = createSelector(
   [selectCategoryReducer],
   (categoriesSlice) => categoriesSlice.isLoading

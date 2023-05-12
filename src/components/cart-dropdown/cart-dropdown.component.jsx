@@ -6,6 +6,8 @@ import { selectCartOpen } from "../../store/cart/cart.selector.js";
 import { setIsCartOpen } from "../../store/cart/cart.action.js";
 import { selectCartItems } from "../../store/cart/cart.selector";
 
+
+
 import {
   CartDropDownContainer,
   CartItems,
@@ -23,16 +25,24 @@ const CartDropdown = () => {
     navigate("/checkout");
     dispatch(setIsCartOpen(!isCartOpen));
   };
+  
   return (
     <CartDropDownContainer>
+    
       <CartItems>
+      
         {cartItems.length ? (
           cartItems.map((item) => <CartItem key={item.id} cartItem={item} />)
         ) : (
           <EmptyMessage>Cart is empty</EmptyMessage>
+          
         )}
+    
       </CartItems>
+      
       <Button onClick={goToCheckOutHandler}>CHECK-OUT</Button>
+      
+
     </CartDropDownContainer>
   );
 };
